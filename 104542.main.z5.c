@@ -5,16 +5,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpce]) 
+void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpce])  //interactions, rows, columns, array
 {
-	int r = riadky;
-	int s = stlpce;
-	int pocet = 0;
+	int r = riadky; //rows
+	int s = stlpce; // columns
+	int pocet = 0; 
 	int i, j;
 
     char pole2[r][s];
 	
-	for (i=r-1;i<r;i++)// lavy dolny roh
+	for (i=r-1;i<r;i++)// left lower corner
 	{
 		for (j=0;j<1;j++)
 		{
@@ -90,7 +90,7 @@ void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpc
 		}
 	}
 	
-	for (i=r-1;i<r;i++)// pravy dolny roh
+	for (i=r-1;i<r;i++)// right lower corner
 	{
 		for (j=s-1;j<s;j++)
 		{
@@ -116,12 +116,12 @@ void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpc
 				{
 					pocet++;
 				}
-				if (pocet==2 || pocet==3) // bunka ostava zit
+				if (pocet==2 || pocet==3) // stays alive
 				{
 				pole2[i][j]='j';
 				
 				}
-				if (pocet<2 || pocet>3) //bunka zomrela
+				if (pocet<2 || pocet>3) // died
 				{
 				pole2[i][j]='n';
 				pocet=0;
@@ -151,12 +151,12 @@ void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpc
 				{
 					pocet++;
 				}
-				if (pocet==3) // bunka ozije
+				if (pocet==3) // came back to life
 				{
 				pole2[i][j]='j';
 				
 				}
-				if (pocet!=3) // bunka ostane mrtva
+				if (pocet!=3) // stays dead
 				{
 				pole2[i][j]='n';
 				
@@ -166,7 +166,7 @@ void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpc
 		}
 	}
 	
-	for (i=0;i<1;i++)// pravy horny roh
+	for (i=0;i<1;i++)// right upper corner
 	{
 		for (j=s-1;j<s;j++)
 		{
@@ -192,12 +192,12 @@ void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpc
 				{
 					pocet++;
 				}
-				if (pocet==2 || pocet==3) // bunka ostava zit
+				if (pocet==2 || pocet==3) // stays alive
 				{
 				pole2[i][j]='j';
 				
 				}
-				if (pocet<2 || pocet>3) //bunka zomrela
+				if (pocet<2 || pocet>3) // died
 				{
 				pole2[i][j]='n';
 				pocet=0;
@@ -227,12 +227,12 @@ void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpc
 				{
 					pocet++;
 				}
-				if (pocet==3) // bunka ozije
+				if (pocet==3) // came back to life
 				{
 				pole2[i][j]='j';
 				
 				}
-				if (pocet!=3) // bunka ostane mrtva
+				if (pocet!=3) // stays dead
 				{
 				pole2[i][j]='n';
 				
@@ -241,7 +241,7 @@ void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpc
 			}			
 		}	
 	}	
-	for(i=0;i<1;i++)// lavy horny roh
+	for(i=0;i<1;i++)// left upper corner
 	{
 		for(j=0;j<1;j++)
 		{
@@ -318,7 +318,7 @@ void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpc
 	}
 	
 	
-	for (i=r-1;i<r;i++) //dolny okraj bez rohov
+	for (i=r-1;i<r;i++) //lower row without corners
 	{
 		for (j=1;j<s-1;j++)
 		{
@@ -401,7 +401,7 @@ void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpc
 		}	
 	}
 	
-	for(i=1;i<r-1;i++) // pravy okraj bez rohov
+	for(i=1;i<r-1;i++) // right column without corners
 	{
 		for(j=s-1;j<s;j++)
 		{
@@ -486,7 +486,7 @@ void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpc
 	}
 	
 		
-	for(i=1;i<r-1;i++) // lavy okraj bez rohov
+	for(i=1;i<r-1;i++) // left column without corners
 	{
 		for(j=0;j<1;j++)
 		{
@@ -569,7 +569,7 @@ void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpc
 		}
 	}
 	
-	 for (i=0;i<1;i++) //horny okraj bez rohov
+	 for (i=0;i<1;i++) //upper row without corners
 	{
 		for (j=1;j<s-1;j++)
 		{
@@ -766,7 +766,7 @@ void next_state(int interakcie,int riadky, int stlpce,char (*pole)[riadky][stlpc
 	}
 }
 
-void read_text_file(int r,int s,char *nazov_suboru,char (*pole)[r][s]) //citanie suboru
+void read_text_file(int r,int s,char *nazov_suboru,char (*pole)[r][s]) //reading from file
 {
 	FILE *myFile;
     myFile = fopen(nazov_suboru, "r");
@@ -823,7 +823,7 @@ void read_text_file(int r,int s,char *nazov_suboru,char (*pole)[r][s]) //citanie
 	fclose(myFile);  
 }
 
-void write_text_file(int r,int s,char *nazov_suboru,char (*pole)[r][s]) //zapisanie do suboru
+void write_text_file(int r,int s,char *nazov_suboru,char (*pole)[r][s]) //writing into file
 {
 	int i,j;
 	FILE* fp2; 
@@ -839,7 +839,7 @@ void write_text_file(int r,int s,char *nazov_suboru,char (*pole)[r][s]) //zapisa
 	fclose(fp2);
 }
 
-void print_state(int r,int s,char (*pole)[r][s]) //printovanie stavu
+void print_state(int r,int s,char (*pole)[r][s]) //print state
 {
 	int i,j;
 	
@@ -928,7 +928,7 @@ void game_of_life(int argc, char* argv[])
 	}
 
 
-	write_text_file(r,s,output,&ppole); // vypis poslednej interakcie do suboru
+	write_text_file(r,s,output,&ppole); // print last interaction from file
 }
 
 int main(int argc, char* argv[])
